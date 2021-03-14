@@ -1,0 +1,14 @@
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\Main.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\model\OutsourcedPart.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\repository\InventoryRepository.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\model\Product.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\Controller.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\AddPartController.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\MainScreenController.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\AddProductController.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\service\InventoryService.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\model\Inventory.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\model\Part.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\model\InhousePart.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\ModifyPartController.java
+C:\Users\marc_\Desktop\02_Inventory\src\main\java\inventory\controller\ModifyProductController.java
