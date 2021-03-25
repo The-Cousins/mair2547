@@ -10,17 +10,19 @@ import java.util.StringTokenizer;
 
 public class InventoryRepository {
 
-	private static String filename = "data/items.txt";
+	// George Mihoc: Parametrized filename
+	private String filename = "";
 	private Inventory inventory;
 
-	public InventoryRepository(){
+	public InventoryRepository(String filename){
 		this.inventory=new Inventory();
+		this.filename = filename;
 		readData();
 	}
 
 	public void readData(){
 		ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(classLoader.getResource(filename).getFile());
+		File file = new File(filename);
 		ObservableList<Part> listParts = FXCollections.observableArrayList();
 		ObservableList<Product> listProducts = FXCollections.observableArrayList();
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -108,7 +110,7 @@ public class InventoryRepository {
 	public void writeAll() {
 
 		ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(classLoader.getResource(filename).getFile());
+		File file = new File(filename);
 
 		BufferedWriter bw = null;
 		ObservableList<Part> parts=inventory.getAllParts();
