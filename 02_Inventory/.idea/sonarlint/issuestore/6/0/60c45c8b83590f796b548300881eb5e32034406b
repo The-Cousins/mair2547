@@ -1,0 +1,16 @@
+
+Lsquid:S3655m"5Call "result.isPresent()" before accessing the value.(ÃÇûÞ
+psquid:S1450"TRemove the "stage" field and declare it as a local variable in the relevant methods.(‹ðÑœýÿÿÿÿ
+ksquid:S1450"TRemove the "scene" field and declare it as a local variable in the relevant methods.(‹ôÒ¡
+rsquid:S1450"[Remove the "errorMessage" field and declare it as a local variable in the relevant methods.(ÊÃ‘æ
+—squid:S1186>"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¥×¹<
+7squid:S2129" Remove this "String" constructor(ÊÃ‘æ
+T
+squid:S106n"9Replace this use of System.out or System.err by a logger.(©²²éúÿÿÿÿ
+O
+squid:S106q"9Replace this use of System.out or System.err by a logger.(¤Õï«
+Esquid:S1125¤"(Remove the literal "true" boolean value.(ÿÂóéüÿÿÿÿ
+U
+squid:S106­"9Replace this use of System.out or System.err by a logger.(Éâ…ºýÿÿÿÿ
+Fsquid:S1068"*Remove this unused "partId" private field.(•›™âýÿÿÿÿ
+bsquid:CommentedOutCodeLineW"<This block of commented-out lines of code should be removed.( ÆüÖ

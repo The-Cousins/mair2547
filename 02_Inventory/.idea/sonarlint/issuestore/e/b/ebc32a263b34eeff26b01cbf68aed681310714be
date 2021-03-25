@@ -1,0 +1,20 @@
+
+Msquid:S3655®"5Call "result.isPresent()" before accessing the value.(ÃÇûŞ
+Msquid:S3655˜"5Call "result.isPresent()" before accessing the value.(ÃÇûŞ
+psquid:S1450"TRemove the "stage" field and declare it as a local variable in the relevant methods.(‹ğÑœıÿÿÿÿ
+ksquid:S1450"TRemove the "scene" field and declare it as a local variable in the relevant methods.(‹ôÒ¡
+rsquid:S1450"[Remove the "errorMessage" field and declare it as a local variable in the relevant methods.(ÊÃ‘æ
+squid:S1186W"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ùÍï”ùÿÿÿÿ
+7squid:S2129" Remove this "String" constructor(ÊÃ‘æ
+U
+squid:S106™"9Replace this use of System.out or System.err by a logger.(ò¤áÿûÿÿÿÿ
+U
+squid:S106œ"9Replace this use of System.out or System.err by a logger.(½ğöÈıÿÿÿÿ
+U
+squid:S106¯"9Replace this use of System.out or System.err by a logger.(ñ¢©·şÿÿÿÿ
+P
+squid:S106²"9Replace this use of System.out or System.err by a logger.(¤Õï«
+U
+squid:S106Ş"9Replace this use of System.out or System.err by a logger.(Éâ…ºıÿÿÿÿ
+Dsquid:S1068 "-Remove this unused "productId" private field.(şáÀã
+bsquid:CommentedOutCodeLineu"<This block of commented-out lines of code should be removed.( ÆüÖ

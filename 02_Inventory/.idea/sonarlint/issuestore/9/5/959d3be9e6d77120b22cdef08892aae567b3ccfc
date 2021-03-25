@@ -1,0 +1,14 @@
+
+4squid:S1643”"Use a StringBuilder instead.(ŠÑ‡à
+csquid:S2095Q"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ãÈˆ¦
+csquid:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ãÈˆ¦
+dsquid:S2095ˆ"LUse try-with-resources or close this "BufferedWriter" in a "finally" clause.(ù»ı
+?squid:S1148%"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148'"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148Z"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148\"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+[squid:S2147&"DCombine this catch with the one at line 36, which has the same body.(ï­£Ä
+[squid:S2147["DCombine this catch with the one at line 89, which has the same body.(ï­£Ä
+U
+squid:S106Š"9Replace this use of System.out or System.err by a logger.(Ñ£±Ôúÿÿÿÿ
