@@ -32,8 +32,8 @@ class InventoryServiceTest {
     void addInhousePart() {
         addInhouseValidPart();
         addInhouseInvalidNamePart();
-        addInhouseInvalidStockPart2();
-        addInhouseInvalidStockPart3();
+        addInhouseStockLowerThanMinPart();
+        addInhouseStockGreaterThanMaxPart();
     }
 
     @org.junit.jupiter.api.Test
@@ -80,7 +80,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void addInhouseInvalidStockPart2() {
+    void addInhouseStockLowerThanMinPart() {
         try {
             String name = "surub";
             int price = 5;
@@ -98,7 +98,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Test
-    void addInhouseInvalidStockPart3() {
+    void addInhouseStockGreaterThanMaxPart() {
         try {
             String name = "surub";
             int price = 5;
