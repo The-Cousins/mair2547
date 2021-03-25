@@ -15,30 +15,35 @@ public class InventoryRepository {
 
 	public InventoryRepository(){
 		this.inventory=new Inventory();
-		readParts();
-		readProducts();
+		readData();
 	}
 
-	public void readParts(){
+	public void readData(){
 		ClassLoader classLoader = InventoryRepository.class.getClassLoader();
 		File file = new File(classLoader.getResource(filename).getFile());
-		ObservableList<Part> listP = FXCollections.observableArrayList();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
+		ObservableList<Part> listParts = FXCollections.observableArrayList();
+		ObservableList<Product> listProducts = FXCollections.observableArrayList();
+		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+
 			String line = null;
 			while((line=br.readLine())!=null){
-				Part part=getPartFromString(line);
-				if (part!=null)
-					listP.add(part);
+				if(line.charAt(0) == 'I' || line.charAt(0) == 'O') {
+					Part part = getPartFromString(line);
+					if (part != null)
+						listParts.add(part);
+				}
+				else if(line.charAt(0) == 'P'){
+					Product product=getProductFromString(line);
+					if (product!=null)
+						listProducts.add(product);
+				}
 			}
 			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		inventory.setAllParts(listP);
+		inventory.setAllParts(listParts);
+		inventory.setProducts(listProducts);
 	}
 
 	private Part getPartFromString(String line){
@@ -69,29 +74,6 @@ public class InventoryRepository {
 			item = new OutsourcedPart(id, name, price, inStock, minStock, maxStock, company);
 		}
 		return item;
-	}
-
-	public void readProducts(){
-		ClassLoader classLoader = InventoryRepository.class.getClassLoader();
-		File file = new File(classLoader.getResource(filename).getFile());
-
-		ObservableList<Product> listP = FXCollections.observableArrayList();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(file));
-			String line = null;
-			while((line=br.readLine())!=null){
-				Product product=getProductFromString(line);
-				if (product!=null)
-					listP.add(product);
-			}
-			br.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		inventory.setProducts(listP);
 	}
 
 	private Product getProductFromString(String line){

@@ -68,7 +68,7 @@ public class ModifyPartController implements Initializable, Controller {
     public ModifyPartController(){}
 
     public void setService(InventoryService service){
-        this.service=service;
+        this.service = service;
         fillWithData();
     }
 
@@ -185,7 +185,7 @@ public class ModifyPartController implements Initializable, Controller {
         errorMessage = "";
         
         try {
-            errorMessage = Part.isValidPart(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), errorMessage);
+            errorMessage = Part.isValidPart(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max));
             if(errorMessage.length() > 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error Adding Part!");
@@ -203,7 +203,7 @@ public class ModifyPartController implements Initializable, Controller {
 
         } catch (NumberFormatException e) {
             System.out.println("Blank Fields");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Adding Part!");
             alert.setHeaderText("Error");
             alert.setContentText("Form contains blank field.");

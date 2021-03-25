@@ -1,5 +1,7 @@
 package inventory.controller;
 
+import inventory.model.InhousePart;
+import inventory.model.OutsourcedPart;
 import inventory.model.Part;
 import inventory.service.InventoryService;
 import javafx.event.ActionEvent;
@@ -24,8 +26,7 @@ public class AddPartController implements Initializable, Controller {
     private Stage stage;
     private Parent scene;
     private boolean isOutsourced = true;
-    private String errorMessage = new String();
-    private int partId;
+    private String errorMessage = "";
 
     private InventoryService service;
     
@@ -84,7 +85,6 @@ public class AddPartController implements Initializable, Controller {
     private void displayScene(ActionEvent event, String source) throws IOException {
         stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         FXMLLoader loader= new FXMLLoader(getClass().getResource(source));
-        //scene = FXMLLoader.load(getClass().getResource(source));
         scene = loader.load();
         Controller ctrl=loader.getController();
         ctrl.setService(service);
@@ -106,7 +106,7 @@ public class AddPartController implements Initializable, Controller {
         alert.setHeaderText("Confirm Cancelation");
         alert.setContentText("Are you sure you want to cancel adding part?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK) {
+        if(result.isPresent() && result.get() == ButtonType.OK) {
             System.out.println("Ok selected. Part addition canceled.");
             displayScene(event, "/fxml/MainScreen.fxml");
         } else {
@@ -117,10 +117,10 @@ public class AddPartController implements Initializable, Controller {
     /**
      * If in-house radio button is selected set isOutsourced boolean
      * to false and modify dynamic label to Machine ID
-     * @param event 
+     * @param
      */
     @FXML
-    void handleInhouseRBtn(ActionEvent event) {
+    void handleInhouseRBtn() {
         isOutsourced = false;
         addPartDynamicLbl.setText("Machine ID");
     }
@@ -128,10 +128,10 @@ public class AddPartController implements Initializable, Controller {
     /**
      * If outsourced radio button is selected set isOutsourced boolean
      * to true and modify dynamic label to Company Name
-     * @param event 
+     * @param
      */
     @FXML
-    void handleOutsourcedRBtn(ActionEvent event) {
+    void handleOutsourcedRBtn() {
         isOutsourced = true;
         addPartDynamicLbl.setText("Company Name");
     }
@@ -143,32 +143,42 @@ public class AddPartController implements Initializable, Controller {
      * @throws IOException
      */
     @FXML
-    void handleAddPartSave(ActionEvent event) throws IOException {
+    void handleAddPartSave(ActionEvent event){
         String name = nameTxt.getText();
-        String price = priceTxt.getText();
-        String inStock = inventoryTxt.getText();
-        String min = minTxt.getText();
-        String max = maxTxt.getText();
+        String priceStr = priceTxt.getText();
+        String inStockStr = inventoryTxt.getText();
+        String minStr = minTxt.getText();
+        String maxStr = maxTxt.getText();
         String partDynamicValue = addPartDynamicTxt.getText();
         errorMessage = "";
-        
+
         try {
-            errorMessage = Part.isValidPart(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), errorMessage);
-            if(errorMessage.length() > 0) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error Adding Part!");
-                alert.setHeaderText("Error!");
-                alert.setContentText(errorMessage);
-                alert.showAndWait();
+            Double price = Double.parseDouble(priceStr);
+            Integer inStock = Integer.parseInt(inStockStr);
+            Integer min = Integer.parseInt(minStr);
+            Integer max = Integer.parseInt(maxStr);
+            errorMessage = Part.isValidPart(name, price, inStock, min, max);
+
+            if(isOutsourced == true) {
+                   errorMessage += OutsourcedPart.isValidOutsourcedPart(partDynamicValue);
+                   service.addOutsourcePart(name, price, inStock, min, max, partDynamicValue);
             } else {
-               if(isOutsourced == true) {
-                    service.addOutsourcePart(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), partDynamicValue);
-                } else {
-                    service.addInhousePart(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), Integer.parseInt(partDynamicValue));
-                }
+                   Integer machineId = Integer.parseInt(partDynamicValue);
+                   errorMessage += InhousePart.isValidInhousePart(machineId);
+                    service.addInhousePart(name, price, inStock, min, max, machineId);
+            }
+
+            if(errorMessage.length() > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error Adding Part!");
+                    alert.setHeaderText("Error!");
+                    alert.setContentText(errorMessage);
+                    alert.showAndWait();
+            }
+            else{
                 displayScene(event, "/fxml/MainScreen.fxml");
             }
-            
+
         } catch (NumberFormatException e) {
             System.out.println("Form contains blank field.");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -177,6 +187,17 @@ public class AddPartController implements Initializable, Controller {
             alert.setContentText("Form contains blank field.");
             alert.showAndWait();
         }
+        catch (IOException e){
+            showErrorLoadScene();
+        }
+    }
+
+    void showErrorLoadScene(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error loading view!");
+        alert.setHeaderText("Error!");
+        alert.setContentText("The view could not be loaded properly. Try again!");
+        alert.showAndWait();
     }
 
 }

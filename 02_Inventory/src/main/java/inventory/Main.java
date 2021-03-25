@@ -14,18 +14,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        InventoryRepository repo= new InventoryRepository();
+        InventoryRepository repo = new InventoryRepository();
         InventoryService service = new InventoryService(repo);
         System.out.println(service.getAllProducts());
         System.out.println(service.getAllParts());
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/fxml/MainScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainScreen.fxml"));
 
-        Parent root=loader.load();
-        MainScreenController ctrl=loader.getController();
+        Parent root = loader.load();
+        MainScreenController ctrl = loader.getController();
         ctrl.setService(service);
 
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }

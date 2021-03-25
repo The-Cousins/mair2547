@@ -1,0 +1,27 @@
+
+q
+java:S1450 "[Remove the "errorMessage" field and declare it as a local variable in the relevant methods.(ÊÃ‘æ
+O	java:S106£"9Replace this use of System.out or System.err by a logger.(§Žª¬
+—
+java:S1186h"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¦žÊ—
+6
+java:S2129 " Remove this "String" constructor(ÊÃ‘æ
+j
+java:S1450"TRemove the "scene" field and declare it as a local variable in the relevant methods.(‹ôÒ¡
+Q	java:S125v"<This block of commented-out lines of code should be removed.( ÆüÖ
+L
+java:S1068""*Remove this unused "partId" private field.(•›™âýÿÿÿÿ8ÑÀ£Ž‚/
+œ
+java:S1186D"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÌÎ”•ûÿÿÿÿ
+o
+java:S1450"TRemove the "stage" field and declare it as a local variable in the relevant methods.(‹ðÑœýÿÿÿÿ
+]
+java:S1117²":Rename "partId" which hides the field declared at line 34.(ÂçšÇúÿÿÿÿ8ÑÀ£Ž‚/
+w
+java:S1450""URemove the "partId" field and declare it as a local variable in the relevant methods.(•›™âýÿÿÿÿ8ÑÀ£Ž‚/
+D
+java:S1125Ä"(Remove the literal "true" boolean value.(ÿÂóéüÿÿÿÿ
+L
+java:S3655¢"5Call "result.isPresent()" before accessing the value.(ÃÇûÞ
+T	java:S106¦"9Replace this use of System.out or System.err by a logger.(ùÿèÁøÿÿÿÿ
+T	java:S106Í"9Replace this use of System.out or System.err by a logger.(Ï³Ìùÿÿÿÿ

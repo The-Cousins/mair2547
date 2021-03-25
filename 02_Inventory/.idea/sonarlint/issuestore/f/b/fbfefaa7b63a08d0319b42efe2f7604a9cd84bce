@@ -1,4 +1,4 @@
 
-Ssquid:S00107/"<Method has 8 parameters, which is greater than 7 authorized.(²ÅÓ7
-Ssquid:S001074"<Method has 8 parameters, which is greater than 7 authorized.(çÄû"
-Tsquid:S001079"<Method has 8 parameters, which is greater than 7 authorized.(¥Á¥±
+W	java:S107/"<Method has 8 parameters, which is greater than 7 authorized.(²ÅÓ78²Æ¤‹‚/
+W	java:S1074"<Method has 8 parameters, which is greater than 7 authorized.(çÄû"8²Æ¤‹‚/
+X	java:S1079"<Method has 8 parameters, which is greater than 7 authorized.(¥Á¥±8²Æ¤‹‚/

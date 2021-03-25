@@ -22,6 +22,16 @@ public class InhousePart extends Part {
         this.machineId = machineId;
     }
 
+    public static String isValidInhousePart(int machineId){
+        String errorMessage = "";
+
+        if(machineId <= 0){
+            errorMessage += "Machine Id can't be negative!";
+        }
+
+        return errorMessage;
+    }
+
     @Override
     public String toString() {
         return "I,"+super.toString()+","+getMachineId();

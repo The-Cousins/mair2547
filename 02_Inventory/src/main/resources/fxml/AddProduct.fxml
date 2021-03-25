@@ -82,7 +82,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#handleSearchProduct" text="Search" />
+                        <Button mnemonicParsing="false" onAction="#handleSearchPart" text="Search" />
                         <TextField fx:id="productSearchTxt">
                            <HBox.margin>
                               <Insets left="10.0" />
@@ -90,7 +90,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <TableView fx:id="addProductTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="addPartTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="addProductIdCol" prefWidth="126.0" text="Part ID" />
                       <TableColumn fx:id="addProductNameCol" prefWidth="126.0" text="Part Name" />
@@ -109,7 +109,7 @@
                       <Button mnemonicParsing="false" onAction="#handleAddProduct" text="Add" />
                     </buttons>
                   </ButtonBar>
-                  <TableView fx:id="deleteProductTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="deletePartTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="deleteProductIdCol" prefWidth="126.0" text="Part ID" />
                       <TableColumn fx:id="deleteProductNameCol" prefWidth="126.0" text="Part Name" />

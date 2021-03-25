@@ -58,7 +58,7 @@ public class Product {
     
     // Setters
     public void setAssociatedParts(ObservableList<Part> associatedParts) {
-        associatedParts = associatedParts;
+        this.associatedParts = associatedParts;
     }
 
     public void setProductId(int productId) {
@@ -96,7 +96,7 @@ public class Product {
     
     public Part lookupAssociatedPart(String searchItem) {
         for(Part p:associatedParts) {
-            if(p.getName().contains(searchItem) || new Integer(p.getPartId()).toString().equals(searchItem)) return p;
+            if(p.getName().contains(searchItem) || Integer.toString(p.getPartId()).equals(searchItem)) return p;
         }
         return null;
     }

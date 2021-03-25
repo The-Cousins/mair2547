@@ -23,6 +23,16 @@ public class OutsourcedPart extends Part {
         this.companyName = companyName;
     }
 
+    public static String isValidOutsourcedPart(String companyName){
+        String errorMessage = "";
+
+        if(companyName.equals("")){
+            errorMessage += "Company name can't be null!";
+        }
+
+        return errorMessage;
+    }
+
     @Override
     public String toString() {
         return "O,"+super.toString()+","+getCompanyName();

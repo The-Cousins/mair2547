@@ -29,7 +29,6 @@ public class AddProductController implements Initializable, Controller {
     private Parent scene;
     private ObservableList<Part> addParts = FXCollections.observableArrayList();
     private String errorMessage = new String();
-    private int productId;
 
     private InventoryService service;
     
@@ -55,7 +54,7 @@ public class AddProductController implements Initializable, Controller {
     private TextField productSearchTxt;
 
     @FXML
-    private TableView<Part> addProductTableView;
+    private TableView<Part> addPartTableView;
 
     @FXML
     private TableColumn<Part, Integer> addProductIdCol;
@@ -70,7 +69,7 @@ public class AddProductController implements Initializable, Controller {
     private TableColumn<Part, Integer> addProductPriceCol;
 
     @FXML
-    private TableView<Part> deleteProductTableView;
+    private TableView<Part> deletePartTableView;
 
     @FXML
     private TableColumn<Part, Integer> deleteProductIdCol;
@@ -87,8 +86,8 @@ public class AddProductController implements Initializable, Controller {
     public AddProductController(){}
 
     public void setService(InventoryService service){
-        this.service=service;
-        addProductTableView.setItems(service.getAllParts());
+        this.service = service;
+        addPartTableView.setItems(service.getAllParts());
 
     }
 
@@ -102,6 +101,11 @@ public class AddProductController implements Initializable, Controller {
         addProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         addProductInventoryCol.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         addProductPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        deleteProductIdCol.setCellValueFactory(new PropertyValueFactory<>("partId"));
+        deleteProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        deleteProductInventoryCol.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        deleteProductPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
     /**
@@ -125,35 +129,33 @@ public class AddProductController implements Initializable, Controller {
     /**
      * Method to add values of addParts to the bottom table view of the scene.
      */
-    public void updateDeleteProductTableView() {
-        deleteProductTableView.setItems(addParts);
-        
-        deleteProductIdCol.setCellValueFactory(new PropertyValueFactory<>("partId"));
-        deleteProductNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        deleteProductInventoryCol.setCellValueFactory(new PropertyValueFactory<>("inStock"));
-        deleteProductPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+    public void updateTableView() {
+        deletePartTableView.setItems(addParts);
     }
 
     /**
      * Ask user for confirmation before deleting selected part from current product.
-     * @param event 
+     * @param
      */
     @FXML
-    void handleDeleteProduct(ActionEvent event) {
-        Part part = deleteProductTableView.getSelectionModel().getSelectedItem();
+    void handleDeleteProduct() {
+        Part part = deletePartTableView.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Confirm Part Deletion!");
-        alert.setContentText("Are you sure you want to delete part " + part.getName() + " from parts?");
-        Optional<ButtonType> result = alert.showAndWait();
+        if(part != null) {
 
-        if (result.get() == ButtonType.OK) {
-            System.out.println("Part deleted.");
-            addParts.remove(part);
-        } else {
-            System.out.println("Canceled part deletion.");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Confirm Part Deletion!");
+            alert.setContentText("Are you sure you want to delete part " + part.getName() + " from parts?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                System.out.println("Part deleted.");
+                addParts.remove(part);
+            } else {
+                System.out.println("Canceled part deletion.");
+            }
         }
     }
 
@@ -164,7 +166,7 @@ public class AddProductController implements Initializable, Controller {
      * @throws IOException
      */
     @FXML
-    void handleCancelProduct(ActionEvent event) throws IOException {
+    void handleCancelProduct(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
         alert.setTitle("Confirmation Needed");
@@ -173,7 +175,12 @@ public class AddProductController implements Initializable, Controller {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK) {
             System.out.println("Ok selected. Product addition canceled.");
-            displayScene(event, "/fxml/MainScreen.fxml");
+            try {
+                displayScene(event, "/fxml/MainScreen.fxml");
+            }
+            catch(IOException e){
+                showErrorLoadScene();
+            }
         } else {
             System.out.println("Cancel clicked.");
         }
@@ -182,13 +189,15 @@ public class AddProductController implements Initializable, Controller {
     /**
      * Add selected part from top table view to bottom table view in order to create
      * new product
-     * @param event 
+     * @param
      */
     @FXML
-    void handleAddProduct(ActionEvent event) {
-        Part part = addProductTableView.getSelectionModel().getSelectedItem();
-        addParts.add(part);
-        updateDeleteProductTableView();
+    void handleAddProduct() {
+        Part part = addPartTableView.getSelectionModel().getSelectedItem();
+        if(part != null) {
+            addParts.add(part);
+            updateTableView();
+        }
     }
 
     /**
@@ -198,16 +207,22 @@ public class AddProductController implements Initializable, Controller {
      * @throws IOException
      */
     @FXML
-    void handleSaveProduct(ActionEvent event) throws IOException {
+    void handleSaveProduct(ActionEvent event){
         String name = nameTxt.getText();
-        String price = priceTxt.getText();
-        String inStock = inventoryTxt.getText();
-        String min = minTxt.getText();
-        String max = maxTxt.getText();
+        String priceStr = priceTxt.getText();
+        String inStockStr = inventoryTxt.getText();
+        String minStr = minTxt.getText();
+        String maxStr = maxTxt.getText();
         errorMessage = "";
         
         try {
-            errorMessage = Product.isValidProduct(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), addParts, errorMessage);
+
+            Double price = Double.parseDouble(priceStr);
+            Integer inStock = Integer.parseInt(inStockStr);
+            Integer min = Integer.parseInt(minStr);
+            Integer max = Integer.parseInt(maxStr);
+
+            errorMessage = Product.isValidProduct(name, price, inStock, min, max, addParts, errorMessage);
             if(errorMessage.length() > 0) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error Adding Part!");
@@ -215,7 +230,7 @@ public class AddProductController implements Initializable, Controller {
                 alert.setContentText(errorMessage);
                 alert.showAndWait();
             } else {
-                service.addProduct(name, Double.parseDouble(price), Integer.parseInt(inStock), Integer.parseInt(min), Integer.parseInt(max), addParts);
+                service.addProduct(name, price, inStock, min, max, addParts);
                 displayScene(event, "/fxml/MainScreen.fxml");
             }
         } catch (NumberFormatException e) {
@@ -226,17 +241,28 @@ public class AddProductController implements Initializable, Controller {
             alert.setContentText("Form contains blank field.");
             alert.showAndWait();
         }
+        catch(IOException e){
+            showErrorLoadScene();
+        }
 
     }
 
     /**
      * Gets search text and inputs into lookupAssociatedPart method to highlight desired part
-     * @param event 
+     * @param
      */
     @FXML
-    void handleSearchProduct(ActionEvent event) {
+    void handleSearchPart() {
         String x = productSearchTxt.getText();
-        addProductTableView.getSelectionModel().select(service.lookupPart(x));
+        addPartTableView.getSelectionModel().select(service.lookupPart(x));
     }
 
+    void showErrorLoadScene(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error loading view!");
+        alert.setHeaderText("Error!");
+        alert.setContentText("The view could not be loaded properly. Try again!");
+        alert.showAndWait();
+    }
+    
 }

@@ -83,7 +83,7 @@ public class MainScreenController implements Initializable,Controller {
     public MainScreenController(){}
 
     public void setService(InventoryService service){
-        this.service=service;
+        this.service = service;
         partsTableView.setItems(service.getAllParts());
         productsTableView.setItems(service.getAllProducts());
     }
@@ -126,47 +126,53 @@ public class MainScreenController implements Initializable,Controller {
 
     /**
      * Ask user for confirmation before deleting selected part from list of parts.
-     * @param event 
+     * @param
      */
     @FXML
-    void handleDeletePart(ActionEvent event) {
+    void handleDeletePart() {
         Part part = partsTableView.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Confirm Part Deletion?");
-        alert.setContentText("Are you sure you want to delete part " + part.getName() + " from parts?");
-        Optional<ButtonType> result = alert.showAndWait();
+        if(part != null) {
 
-        if (result.get() == ButtonType.OK) {
-            System.out.println("Part deleted.");
-            service.deletePart(part);
-        } else {
-            System.out.println("Canceled part deletion.");
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Confirm Part Deletion?");
+            alert.setContentText("Are you sure you want to delete part " + part.getName() + " from parts?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                System.out.println("Part deleted.");
+                service.deletePart(part);
+            } else {
+                System.out.println("Canceled part deletion.");
+            }
         }
     }
 
     /**
      * Ask user for confirmation before deleting selected product from list of products.
-     * @param event 
+     * @param
      */
     @FXML
-    void handleDeleteProduct(ActionEvent event) {
+    void handleDeleteProduct() {
         Product product = productsTableView.getSelectionModel().getSelectedItem();
-        
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.initModality(Modality.NONE);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Confirm Product Deletion?");
-        alert.setContentText("Are you sure you want to delete product " + product.getName() + " from products?");
-        Optional<ButtonType> result = alert.showAndWait();
-        
-        if (result.get() == ButtonType.OK) {
-            service.deleteProduct(product);
-            System.out.println("Product " + product.getName() + " was removed.");
-        } else {
-            System.out.println("Product " + product.getName() + " was not removed.");
+
+        if(product != null) {
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.initModality(Modality.NONE);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Confirm Product Deletion?");
+            alert.setContentText("Are you sure you want to delete product " + product.getName() + " from products?");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK) {
+                service.deleteProduct(product);
+                System.out.println("Product " + product.getName() + " was removed.");
+            } else {
+                System.out.println("Product " + product.getName() + " was not removed.");
+            }
         }
     }
 
@@ -176,8 +182,21 @@ public class MainScreenController implements Initializable,Controller {
      * @throws IOException
      */
     @FXML
-    void handleAddPart(ActionEvent event) throws IOException {
-        displayScene(event, "/fxml/AddPart.fxml");
+    void handleAddPart(ActionEvent event){
+        try {
+            displayScene(event, "/fxml/AddPart.fxml");
+        }
+        catch(IOException ex){
+            showErrorLoadScene();
+        }
+    }
+
+    void showErrorLoadScene(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error loading view!");
+        alert.setHeaderText("Error!");
+        alert.setContentText("The view could not be loaded properly. Try again!");
+        alert.showAndWait();
     }
 
     /**
@@ -186,8 +205,13 @@ public class MainScreenController implements Initializable,Controller {
      * @throws IOException
      */
     @FXML
-    void handleAddProduct(ActionEvent event) throws IOException {
-        displayScene(event, "/fxml/AddProduct.fxml");
+    void handleAddProduct(ActionEvent event){
+        try {
+            displayScene(event, "/fxml/AddProduct.fxml");
+        }
+        catch(IOException ex){
+            showErrorLoadScene();
+        }
     }
 
     /**
@@ -197,11 +221,17 @@ public class MainScreenController implements Initializable,Controller {
      * @throws IOException
      */
     @FXML
-    void handleModifyPart(ActionEvent event) throws IOException {
+    void handleModifyPart(ActionEvent event){
         modifyPart = partsTableView.getSelectionModel().getSelectedItem();
-        modifyPartIndex = service.getAllParts().indexOf(modifyPart);
-        
-        displayScene(event, "/fxml/ModifyPart.fxml");
+        if(modifyPart != null) {
+            modifyPartIndex = service.getAllParts().indexOf(modifyPart);
+
+            try {
+                displayScene(event, "/fxml/ModifyPart.fxml");
+            } catch (IOException ex) {
+                showErrorLoadScene();
+            }
+        }
     }
 
     /**
@@ -210,19 +240,25 @@ public class MainScreenController implements Initializable,Controller {
      * @throws IOException
      */
     @FXML
-    void handleModifyProduct(ActionEvent event) throws IOException {
+    void handleModifyProduct(ActionEvent event){
         modifyProduct = productsTableView.getSelectionModel().getSelectedItem();
-        modifyProductIndex = service.getAllProducts().indexOf(modifyProduct);
-        
-        displayScene(event, "/fxml/ModifyProduct.fxml");
+        if(modifyProduct != null) {
+            modifyProductIndex = service.getAllProducts().indexOf(modifyProduct);
+
+            try {
+                displayScene(event, "/fxml/ModifyProduct.fxml");
+            } catch (IOException ex) {
+                showErrorLoadScene();
+            }
+        }
     }
 
     /**
      * Ask user for confirmation before exiting
-     * @param event 
+     * @param
      */
     @FXML
-    void handleExit(ActionEvent event) {
+    void handleExit() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.initModality(Modality.NONE);
         alert.setTitle("Confirmation Needed");
@@ -239,20 +275,20 @@ public class MainScreenController implements Initializable,Controller {
 
     /**
      * Gets search text and inputs into lookupPart method to highlight desired part
-     * @param event 
+     * @param
      */
     @FXML
-    void handlePartsSearchBtn(ActionEvent event) {
+    void handlePartsSearchBtn() {
         String x = partsSearchTxt.getText();
         partsTableView.getSelectionModel().select(service.lookupPart(x));
     }
 
     /**
      * Gets search text and inputs into lookupProduct method to highlight desired product
-     * @param event 
+     * @param
      */
     @FXML
-    void handleProductsSearchBtn(ActionEvent event) {
+    void handleProductsSearchBtn() {
         String x = productsSearchTxt.getText();
         productsTableView.getSelectionModel().select(service.lookupProduct(x));
     }

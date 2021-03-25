@@ -13,7 +13,7 @@ public abstract class Part {
     private int max;
     
     // Constructor
-    public Part(int partId, String name, double price, int inStock, int min, int max) {
+    protected Part(int partId, String name, double price, int inStock, int min, int max) {
         this.partId = partId;
         this.name = name;
         this.price = price;
@@ -80,10 +80,13 @@ public abstract class Part {
      * @param inStock
      * @param min
      * @param max
-     * @param errorMessage
+     * @param
      * @return 
      */
-    public static String isValidPart(String name, double price, int inStock, int min, int max, String errorMessage) {
+    public static String isValidPart(String name, double price, int inStock, int min, int max) {
+
+        String errorMessage = "";
+
         if(name.equals("")) {
             errorMessage += "A name has not been entered. ";
         }
@@ -95,6 +98,12 @@ public abstract class Part {
         }
         if(min > max) {
             errorMessage += "The Min value must be less than the Max value. ";
+        }
+        if(min < 0){
+            errorMessage += "The Min value can't be negative. ";
+        }
+        if(max < 0){
+            errorMessage += "The Max value can't be negative. ";
         }
         if(inStock < min) {
             errorMessage += "Inventory level is lower than minimum value. ";
