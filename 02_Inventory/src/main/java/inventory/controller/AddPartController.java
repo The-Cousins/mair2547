@@ -165,7 +165,15 @@ public class AddPartController implements Initializable, Controller {
             } else {
                    Integer machineId = Integer.parseInt(partDynamicValue);
                    errorMessage += InhousePart.isValidInhousePart(machineId);
-                   // service.addInhousePart(name, price, inStock, min, max, machineId); // TODO add try catch here MANOBIG BOSS
+                    try {
+                        service.addInhousePart(name, price, inStock, min, max, machineId);
+                    } catch (Exception exception) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Error Adding Part!");
+                        alert.setHeaderText("Error!");
+                        alert.setContentText(errorMessage);
+                        alert.showAndWait();
+                    }
             }
 
             if(errorMessage.length() > 0) {
