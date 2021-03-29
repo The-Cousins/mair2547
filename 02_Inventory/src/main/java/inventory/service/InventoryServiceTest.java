@@ -2,17 +2,28 @@ package inventory.service;
 
 import inventory.model.Part;
 import inventory.repository.InventoryRepository;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/** USED ANNOTATIONS
+ * @org.junit.jupiter.api.Tag()
+ * @org.junit.jupiter.api.RepeatedTest()
+ * @org.junit.jupiter.api.Order()
+ * @org.junit.jupiter.api.DisplayName
+ * @org.junit.Ignore
+ */
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class InventoryServiceTest {
 
     InventoryRepository repo;
     InventoryService service;
-    private String filename= "src/main/resources/data/testItems.txt";
+    private final String filename= "src/main/resources/data/testItems.txt";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -28,16 +39,9 @@ class InventoryServiceTest {
         writer.close();
     }
 
-//    ECP
-    @org.junit.jupiter.api.Test
-    void addInhousePart() {
-        addInhouseValidPartTest1();
-        addInhouseInvalidNamePartTest2();
-        addInhouseStockLowerThanMinPartTest10();
-        addInhouseStockGreaterThanMaxPartTest11();
-    }
-
-    @org.junit.jupiter.api.Test
+    @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.Order(1)
+    @org.junit.jupiter.api.RepeatedTest(5)
     void addInhouseValidPartTest1() {
         try {
             String name = "surub";
@@ -62,6 +66,8 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.Order(2)
     @org.junit.jupiter.api.Test
     void addInhouseInvalidNamePartTest2() {
         try {
@@ -80,6 +86,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("ECP")
     @org.junit.jupiter.api.Test
     void addInhouseStockLowerThanMinPartTest10() {
         try {
@@ -98,6 +105,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("ECP")
     @org.junit.jupiter.api.Test
     void addInhouseStockGreaterThanMaxPartTest11() {
         try {
@@ -116,21 +124,8 @@ class InventoryServiceTest {
         }
     }
 
-//    BVA
-    @org.junit.jupiter.api.Test
-    void addInhousePartBVA() {
-        addInhouseInvalidNamePartBVATest1();
-        addInhouseValidPartBVATest2();
-        addInhouseValidPartBVATest3();
-        addInhouseValidPartBVATest4();
-        addInhouseValidPartBVATest5();
-
-        addInhouseValidPartBVATest26();
-        addInhouseValidPartBVATest27();
-        addInhouseValidPartBVATest28();
-        addInhouseValidPartBVATest29();
-    }
-
+    @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Invalid Name BVA Test")
     @org.junit.jupiter.api.Test
     void addInhouseInvalidNamePartBVATest1() {
         try {
@@ -150,6 +145,29 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.Ignore
+    @org.junit.jupiter.api.Test
+    void ignoredTest() {
+        try {
+            String name = "";
+            int price = 5;
+            int inStock = 100;
+            int min = 50;
+            int max = 200;
+            int partDynamicValue = 29381;
+
+            // Act
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            assert false;
+        } catch (Exception exception) {
+            // Assert
+            assert exception.getMessage().equals("A name has not been entered. ");
+        }
+    }
+
+    @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Valid part BVA Test")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest2() {
         try {
@@ -175,6 +193,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest3() {
         try {
@@ -200,6 +219,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest4() {
         try {
@@ -225,6 +245,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest5() {
         try {
@@ -250,6 +271,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest26() {
         try {
@@ -275,6 +297,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest27() {
         try {
@@ -300,6 +323,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest28() {
         try {
@@ -325,6 +349,7 @@ class InventoryServiceTest {
         }
     }
 
+    @org.junit.jupiter.api.Tag("BVA")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest29() {
         try {
