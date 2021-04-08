@@ -2,6 +2,8 @@
 package inventory.model;
 
 
+import inventory.utils.ExceptionNames;
+
 public class OutsourcedPart extends Part {
     
     // Declare fields
@@ -27,7 +29,7 @@ public class OutsourcedPart extends Part {
         String errorMessage = "";
 
         if(companyName.equals("")){
-            errorMessage += "Company name can't be null!";
+            errorMessage += ExceptionNames.PartExceptions.nullCompanyName;
         }
 
         return errorMessage;

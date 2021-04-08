@@ -2,6 +2,8 @@
 package inventory.model;
 
 
+import inventory.utils.ExceptionNames;
+
 public abstract class Part {
 
     // Declare fields
@@ -88,28 +90,28 @@ public abstract class Part {
         String errorMessage = "";
 
         if(name.equals("")) {
-            errorMessage += "A name has not been entered. ";
+            errorMessage += ExceptionNames.PartExceptions.emptyName;
         }
         if(price < 0.01) {
-            errorMessage += "The price must be greater than 0. ";
+            errorMessage += ExceptionNames.PartExceptions.negativePrice;
         }
         if(inStock < 1) {
-            errorMessage += "Inventory level must be greater than 0. ";
+            errorMessage += ExceptionNames.PartExceptions.negativeStock;
         }
         if(min > max) {
-            errorMessage += "The Min value must be less than the Max value. ";
+            errorMessage += ExceptionNames.PartExceptions.minHigherThanMax;
         }
         if(min < 0){
-            errorMessage += "The Min value can't be negative. ";
+            errorMessage += ExceptionNames.PartExceptions.negativeMinValue;
         }
         if(max < 0){
-            errorMessage += "The Max value can't be negative. ";
+            errorMessage += ExceptionNames.PartExceptions.negativeMaxValue;
         }
         if(inStock < min) {
-            errorMessage += "Inventory level is lower than minimum value. ";
+            errorMessage += ExceptionNames.PartExceptions.stockLowerThanMin;
         }
         if(inStock > max) {
-            errorMessage += "Inventory level is higher than the maximum value. ";
+            errorMessage += ExceptionNames.PartExceptions.stockHigherThanMax;
         }
         return errorMessage;
     }

@@ -2,6 +2,7 @@ package inventory.service;
 
 import inventory.model.Part;
 import inventory.repository.InventoryRepository;
+import inventory.utils.ExceptionNames;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -84,7 +85,7 @@ class InventoryServiceTest {
             service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
         } catch (Exception exception) {
             // Assert
-            assert exception.getMessage().equals("A name has not been entered. ");
+            assert exception.getMessage().equals(ExceptionNames.PartExceptions.emptyName);
         }
     }
 
@@ -104,7 +105,7 @@ class InventoryServiceTest {
             service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
         } catch (Exception exception) {
             // Assert
-            assert exception.getMessage().equals("Inventory level is lower than minimum value. ");
+            assert exception.getMessage().equals(ExceptionNames.PartExceptions.stockLowerThanMin);
         }
     }
 
@@ -124,7 +125,7 @@ class InventoryServiceTest {
             service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
         } catch (Exception exception) {
             // Assert
-            assert exception.getMessage().equals("Inventory level is higher than the maximum value. ");
+            assert exception.getMessage().equals(ExceptionNames.PartExceptions.stockHigherThanMax);
         }
     }
 
@@ -145,7 +146,7 @@ class InventoryServiceTest {
             assert false;
         } catch (Exception exception) {
             // Assert
-            assert exception.getMessage().equals("A name has not been entered. ");
+            assert exception.getMessage().equals(ExceptionNames.PartExceptions.emptyName);
         }
     }
 
@@ -167,7 +168,7 @@ class InventoryServiceTest {
             assert false;
         } catch (Exception exception) {
             // Assert
-            assert exception.getMessage().equals("A name has not been entered. ");
+            assert exception.getMessage().equals(ExceptionNames.PartExceptions.emptyName);
         }
     }
 
