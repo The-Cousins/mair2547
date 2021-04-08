@@ -27,7 +27,6 @@ class InventoryServiceTest {
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
-        // Arrange
         this.repo = new InventoryRepository(filename);
         this.service = new InventoryService(repo);
     }
@@ -40,10 +39,12 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Order(1)
     @org.junit.jupiter.api.RepeatedTest(5)
     void addInhouseValidPartTest1() {
         try {
+            // Arrange
             String name = "surub";
             int price = 5;
             int inStock = 100;
@@ -67,6 +68,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.DisplayName("Exception invalid name")
     @org.junit.jupiter.api.Order(2)
     @org.junit.jupiter.api.Test
     void addInhouseInvalidNamePartTest2() {
@@ -87,6 +89,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.DisplayName("Exception stock lower than min threshold")
     @org.junit.jupiter.api.Test
     void addInhouseStockLowerThanMinPartTest10() {
         try {
@@ -106,6 +109,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("ECP")
+    @org.junit.jupiter.api.DisplayName("Exception stock higher than max threshold")
     @org.junit.jupiter.api.Test
     void addInhouseStockGreaterThanMaxPartTest11() {
         try {
@@ -125,7 +129,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
-    @org.junit.jupiter.api.DisplayName("Invalid Name BVA Test")
+    @org.junit.jupiter.api.DisplayName("Exception invalid name")
     @org.junit.jupiter.api.Test
     void addInhouseInvalidNamePartBVATest1() {
         try {
@@ -146,6 +150,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Ignored test")
     @org.junit.Ignore
     @org.junit.jupiter.api.Test
     void ignoredTest() {
@@ -167,7 +172,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
-    @org.junit.jupiter.api.DisplayName("Valid part BVA Test")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest2() {
         try {
@@ -194,6 +199,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest3() {
         try {
@@ -220,6 +226,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest4() {
         try {
@@ -246,6 +253,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest5() {
         try {
@@ -272,6 +280,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest26() {
         try {
@@ -298,6 +307,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest27() {
         try {
@@ -324,6 +334,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest28() {
         try {
@@ -350,6 +361,7 @@ class InventoryServiceTest {
     }
 
     @org.junit.jupiter.api.Tag("BVA")
+    @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Test
     void addInhouseValidPartBVATest29() {
         try {
