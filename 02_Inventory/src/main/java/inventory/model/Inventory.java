@@ -39,27 +39,6 @@ public class Inventory {
     }
     
     /**
-     * Accepts search parameter and if an ID or name matches input, that product is returned
-     * @param searchItem
-     * @return 
-     */
-    public Product lookupProduct(String searchItem) {
-        if (searchItem == null) {
-            return null;
-        }
-
-        for(Product p: products) {
-            if(p.getName().contains(searchItem)) {
-                return p;
-            }
-            if((p.getProductId()+"").equals(searchItem)) {
-                return p;
-            }
-        }
-        return null;
-    }
-    
-    /**
      * Update product at given index
      * @param index
      * @param product 
@@ -86,6 +65,27 @@ public class Inventory {
      */
     public void addPart(Part part) {
         allParts.add(part);
+    }
+
+    /**
+     * Accepts search parameter and if an ID or name matches input, that product is returned
+     * @param searchItem
+     * @return
+     */
+    public Product lookupProduct(String searchItem) {
+        if (searchItem == null) {
+            return null;
+        }
+
+        for(Product p: products) {
+            if(p.getName().contains(searchItem)) {
+                return p;
+            }
+            if((p.getProductId()+"").equals(searchItem)) {
+                return p;
+            }
+        }
+        return null;
     }
     
     /**

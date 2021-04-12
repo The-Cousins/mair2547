@@ -1,7 +1,8 @@
-package inventory.service;
+package inventory.model;
 
 import inventory.model.Product;
 import inventory.repository.InventoryRepository;
+import inventory.service.InventoryService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,20 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class SearchProductTest {
 
     InventoryRepository repo;
-    InventoryService service;
+    Inventory inventory;
 
     InventoryRepository emptyRepo;
-    InventoryService emptyService;
+    Inventory emptyInventory;
 
     @BeforeEach
     void setUp() {
         String filename = "src/main/resources/data/testProducts.txt";
         this.repo = new InventoryRepository(filename);
-        this.service = new InventoryService(repo);
+        this.inventory = this.repo.getInventory();
 
         String emptyFilename = "src/main/resources/data/testProductsEmpty.txt";
         this.emptyRepo = new InventoryRepository(emptyFilename);
-        this.emptyService = new InventoryService(emptyRepo);
+        this.emptyInventory = this.emptyRepo.getInventory();
     }
 
     @Test
@@ -36,7 +37,7 @@ class SearchProductTest {
     @org.junit.jupiter.api.DisplayName("Null input expected null")
     void WBTNullInputExpectedNull() {
         // Act
-        Product result = service.lookupProduct(null);
+        Product result = inventory.lookupProduct(null);
 
         // Assert
         assert result == null;
@@ -50,7 +51,7 @@ class SearchProductTest {
         String name = "ceas";
 
         // Act
-        Product result = emptyService.lookupProduct(name);
+        Product result = emptyInventory.lookupProduct(name);
 
         // Assert
         assert result == null;
@@ -64,7 +65,7 @@ class SearchProductTest {
         String name = "ceas";
 
         // Act
-        Product result = service.lookupProduct(name);
+        Product result = inventory.lookupProduct(name);
 
         // Assert
         assert result.getProductId() == 1;
@@ -80,7 +81,7 @@ class SearchProductTest {
         String expectedName = "ceas";
 
         // Act
-        Product result = service.lookupProduct(id);
+        Product result = inventory.lookupProduct(id);
 
         // Assert
         assert result.getProductId() == 1;
@@ -95,7 +96,7 @@ class SearchProductTest {
         String name = "lampa";
 
         // Act
-        Product result = service.lookupProduct(name);
+        Product result = inventory.lookupProduct(name);
 
         // Assert
         assert result.getProductId() == 2;
@@ -111,7 +112,7 @@ class SearchProductTest {
         String expectedName = "lampa";
 
         // Act
-        Product result = service.lookupProduct(id);
+        Product result = inventory.lookupProduct(id);
 
         // Assert
         assert result.getProductId() == 2;
@@ -127,7 +128,7 @@ class SearchProductTest {
         String expectedName = "laptop";
 
         // Act
-        Product result = service.lookupProduct(id);
+        Product result = inventory.lookupProduct(id);
 
         // Assert
         assert result.getProductId() == 3;
@@ -143,7 +144,7 @@ class SearchProductTest {
         String expectedName = "mouse";
 
         // Act
-        Product result = service.lookupProduct(id);
+        Product result = inventory.lookupProduct(id);
 
         // Assert
         assert result.getProductId() == 4;
@@ -158,7 +159,7 @@ class SearchProductTest {
         String id = "5";
 
         // Act
-        Product result = service.lookupProduct(id);
+        Product result = inventory.lookupProduct(id);
 
         // Assert
         assert result == null;
