@@ -1,7 +1,8 @@
-package inventory.service;
+package unit;
 
 import inventory.model.Part;
 import inventory.repository.InventoryRepository;
+import inventory.service.InventoryService;
 import inventory.utils.ExceptionNames;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -19,6 +20,8 @@ import java.util.List;
  * @org.junit.Ignore
  */
 
+
+//  Unit testing service
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class InventoryServiceTest {
 

@@ -1,18 +1,12 @@
-package inventory.model;
+package unit;
 
+import inventory.model.Inventory;
 import inventory.model.Product;
 import inventory.repository.InventoryRepository;
-import inventory.service.InventoryService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+// Unit testing repository
 class SearchProductTest {
 
     InventoryRepository repo;
