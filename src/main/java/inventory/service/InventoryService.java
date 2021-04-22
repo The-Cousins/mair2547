@@ -13,14 +13,18 @@ public class InventoryService {
     }
 
 
-    public void addInhousePart(String name, double price, int inStock, int min, int  max, int partDynamicValue) throws Exception{
-        String errorMessage = InhousePart.isValidPart(name, price, inStock, min, max);
-        if (errorMessage.length() > 0) {
-            throw new Exception(errorMessage);
-        } else {
-            InhousePart inhousePart = new InhousePart(repo.getAutoPartId(), name, price, inStock, min, max, partDynamicValue);
+    public void addInhousePart(String name, double price, int inStock, int min, int  max, int partDynamicValue, InhousePart part) throws Exception{
+        if(part == null) {
+            String errorMessage = InhousePart.isValidPart(name, price, inStock, min, max);
+            if (errorMessage.length() > 0) {
+                throw new Exception(errorMessage);
+            } else {
+                InhousePart inhousePart = new InhousePart(repo.getAutoPartId(), name, price, inStock, min, max, partDynamicValue);
 
-            repo.addPart(inhousePart);
+                repo.addPart(inhousePart);
+            }
+        } else {
+                repo.addPart(part);
         }
     }
 

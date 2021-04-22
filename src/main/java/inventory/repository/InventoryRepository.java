@@ -19,6 +19,11 @@ public class InventoryRepository {
 		this.filename = filename;
 		readData();
 	}
+	public InventoryRepository(String filename, Inventory mockInventory) {
+		this.inventory= mockInventory;
+		this.filename = filename;
+		readData();
+	}
 
 	public void readData(){
 		ClassLoader classLoader = InventoryRepository.class.getClassLoader();

@@ -58,7 +58,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -86,7 +86,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
         } catch (Exception exception) {
             // Assert
             assert exception.getMessage().equals(ExceptionNames.PartExceptions.emptyName);
@@ -106,7 +106,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
         } catch (Exception exception) {
             // Assert
             assert exception.getMessage().equals(ExceptionNames.PartExceptions.stockLowerThanMin);
@@ -126,7 +126,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
         } catch (Exception exception) {
             // Assert
             assert exception.getMessage().equals(ExceptionNames.PartExceptions.stockHigherThanMax);
@@ -146,7 +146,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
             assert false;
         } catch (Exception exception) {
             // Assert
@@ -168,7 +168,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
             assert false;
         } catch (Exception exception) {
             // Assert
@@ -189,7 +189,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -216,7 +216,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -243,7 +243,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -270,7 +270,7 @@ class InventoryServiceTest {
             int partDynamicValue = 29381;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -297,7 +297,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -324,7 +324,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -351,7 +351,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
@@ -378,7 +378,7 @@ class InventoryServiceTest {
             int partDynamicValue = 19928;
 
             // Act
-            service.addInhousePart(name, price, inStock, min, max, partDynamicValue);
+            service.addInhousePart(name, price, inStock, min, max, partDynamicValue, null);
 
             List<Part> allParts = service.getAllParts();
             // Assert
