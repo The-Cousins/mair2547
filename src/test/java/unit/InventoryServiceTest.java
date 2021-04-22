@@ -45,6 +45,7 @@ class InventoryServiceTest {
     @org.junit.jupiter.api.Tag("ECP")
     @org.junit.jupiter.api.DisplayName("Success added valid part")
     @org.junit.jupiter.api.Order(1)
+    @org.junit.jupiter.api.Test
 //    @org.junit.jupiter.api.RepeatedTest(5)
     void addInhouseValidPartTest1() {
         try {
