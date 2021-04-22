@@ -20,7 +20,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class InventoryServiceUnitTestWithMockObjects {
+class InventoryServiceUnitMockObjectsTest {
 
     InventoryRepository repo;
     InventoryService service;
